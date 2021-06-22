@@ -15,7 +15,7 @@ def download(path):
                 if not os.path.exists(directory):
                     # 폴더 생성 메서드
                     os.makedirs(directory)
-            except OSError: 
+            except Exception: 
                 # 에러 발생시
                 print('[오류] 폴더 생성을 실패하였습니다.\n' + directory)
                 messagebox.showwarning("유튜브 다운로드 프로그램", "[오류] 폴더 생성을 실패하였습니다.")
@@ -25,11 +25,16 @@ def download(path):
         
         # 유튜브 동영상 다운로드 함수 
         def youtube_download(youtube_path):
-            # 동영상 다운로드 메서드
-            YouTube(youtube_path).streams.first().download('./Downloads/')
-            messagebox.showinfo(
-            "유튜브 다운로드 프로그램", "동영상이 성공적으로 다운로드 되었습니다.")
-
+            try:
+                # 동영상 다운로드 메서드
+                YouTube(youtube_path).streams.first().download('./Downloads/')
+                messagebox.showinfo(
+                "유튜브 다운로드 프로그램", "동영상이 성공적으로 다운로드 되었습니다.")
+            except Exception:
+                print('[오류] 링크 주소를 다시 확인해 주세요.\n')
+                messagebox.showinfo(
+                "유튜브 다운로드 프로그램", "[오류] 링크 주소를 다시 확인해 주세요.")
+                
         # 유튜브 동영상 다운로드 함수 호출
         youtube_download(path)
         
