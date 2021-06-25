@@ -1,5 +1,5 @@
 @echo off
 
-cmd | python ./src/GUI.py
+cmd | python GUI.py
 
 pause

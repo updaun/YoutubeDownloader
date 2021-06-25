@@ -1,7 +1,9 @@
 from tkinter import *
 import tkinter.font
 
-from youtube_download import download
+from youtube_download import Downloader
+
+dl = Downloader()
 
 projectTitle = 'Youtube Downloader v1.0'
 
@@ -16,7 +18,7 @@ root.geometry("440x400+500+150")
 #프로그램 창 크기 변경 제한
 root.resizable(False, False)
 # 프로그램 상단 타이틀 바 로고 import
-root.iconphoto(False, PhotoImage(file='./image/youtube.png'))
+root.iconphoto(False, PhotoImage(file='.\image\youtube.png'))
 # 프로그램 배경 설정
 root.configure(bg=bgcolor)
 # 프로그램 상단 타이틀 바 명칭 설정
@@ -32,7 +34,7 @@ font25 = tkinter.font.Font(family="KoPubWorld돋움체 Medium", size=25)  # 공�
 font3 = tkinter.font.Font(family="KoPubWorld돋움체 Medium",
                           size=18, weight=tkinter.font.BOLD)  # Title 폰트
 # 메인 로고 import
-image1 = PhotoImage(file="./image/youtube.png")
+image1 = PhotoImage(file=".\image\youtube.png")
 # 로고 사이즈 조절
 photoimage1 = image1.subsample(6, 6)
 # 로고를 라벨로 설정
@@ -41,7 +43,7 @@ imgLabel1 = Label(root, image=photoimage1, width=85,
 
 # 버튼 설정
 btn = Button(root, text="동영상 다운로드", width=24, height=1, font=font,
-              foreground='white', background=btncolor, command=lambda: download(inputText.get()))
+              foreground='white', background=btncolor, command=lambda: dl.action(inputText.get()))
 
 
 # 공백 설정
@@ -63,6 +65,8 @@ label2 = Label(root, text='[링크] Youtube 공유 링크를 넣어주세요.', 
 # 텍스트 박스 설정
 inputText = Entry(root, width=35, font=font1,
                   background='azure', relief='solid')
+
+
 
 # 공백
 label000.pack()
