@@ -40,7 +40,7 @@ class Downloader:
     def youtube_download(self, youtube_url):
             try:
                 # 동영상 다운로드 메서드
-                YouTube(youtube_url).streams.first().download('./Downloads/')
+                YouTube(youtube_url).streams.filter(res="720p").first().download('./Downloads/')
                 print('[완료] 동영상을 성공적으로 다운로드 되었습니다.\n')
                 messagebox.showinfo(
                 "유튜브 다운로드 프로그램", "동영상이 성공적으로 다운로드 되었습니다.")
