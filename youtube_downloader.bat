@@ -4,7 +4,7 @@
 cls
 echo starting install pytube library.  
 echo.
-pip install pytube
+pip install -U pytube
 python GUI.py
 
 exit
