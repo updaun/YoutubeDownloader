@@ -1,5 +1,10 @@
 @echo off
 
-cmd | python GUI.py
+:start
+cls
+echo starting install pytube library.  
+echo.
+pip install pytube
+python GUI.py
 
-pause
+exit

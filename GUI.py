@@ -1,7 +1,8 @@
 from tkinter import *
 import tkinter.font
-
 from youtube_download import Downloader
+from tkinter import messagebox
+import pytube
 
 dl = Downloader()
 
@@ -89,4 +90,11 @@ btn.pack()
 
 # 'Enter' 키를 눌러 '동영상 다운로드' 버튼 클릭
 root.bind('<Return>', lambda event=None: btn.invoke())
+
+if int(pytube.__version__[0:2]) < 11:
+    print("pytube 버전을 최신화 해주세요.")
+    print("pip uninstall pytube 로 기존 라이브러리를 삭제하세요.")
+    print("pip install pytube 로 최신 라이브러리를 설치하세요.")
+    messagebox.showwarning("유튜브 다운로드 프로그램", "pytube 라이브러리 버전을 최신화 해주세요.")
+
 root.mainloop()
