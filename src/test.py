@@ -11,9 +11,8 @@ def show_progress_bar(stream, _chunk, _file_handle, bytes_remaining):
     sys.stdout.write(' ↳ |{bar}| {percent}%\r'.format(bar=status, percent=percent))
     sys.stdout.flush()
 
-with open('./test_url.txt', 'r') as file_data:
+with open('./src/test_url.txt', 'r') as file_data:
     for line in file_data:
-        print(line)
         youtube_url = line
 
 video = YouTube(youtube_url, on_progress_callback=show_progress_bar)

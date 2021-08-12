@@ -2,7 +2,6 @@ import os
 from tkinter import messagebox
 from pytube import YouTube
 import sys
-
 import pytube.request
 pytube.request.default_range_size = 9437184
 
@@ -41,13 +40,13 @@ class Downloader:
             messagebox.showwarning("유튜브 다운로드 프로그램", "[오류] 폴더 생성을 실패하였습니다.")
 
 
-    def show_progress_bar(stream, _chunk, _file_handle, bytes_remaining):
-        current = ((stream.filesize - bytes_remaining)/stream.filesize)
-        percent = ('{0:.1f}').format(current*100)
-        progress = int(50*current)
-        status = '█' * progress + '-' * (50 - progress)
-        sys.stdout.write(' ↳ |{bar}| {percent}%\r'.format(bar=status, percent=percent))
-        sys.stdout.flush()
+    # def show_progress_bar(stream, _chunk, _file_handle, bytes_remaining):
+    #     current = ((stream.filesize - bytes_remaining)/stream.filesize)
+    #     percent = ('{0:.1f}').format(current*100)
+    #     progress = int(50*current)
+    #     status = '█' * progress + '-' * (50 - progress)
+    #     sys.stdout.write(' ↳ |{bar}| {percent}%\r'.format(bar=status, percent=percent))
+    #     sys.stdout.flush()
 
     # 유튜브 동영상 다운로드 함수 
     def youtube_download(self, youtube_url):
@@ -58,8 +57,9 @@ class Downloader:
 
         try:
             # 동영상 다운로드 메서드
-            video = YouTube(youtube_url, on_progress_callback=self.show_progress_bar)
-            video.register_on_progress_callback(self.show_progress_bar)
+            video = YouTube(youtube_url)
+            # video = YouTube(youtube_url, on_progress_callback=self.show_progress_bar)
+            # video.register_on_progress_callback(self.show_progress_bar)
             video_type = video.streams.filter(progressive = True, file_extension = "mp4").first()
             video_type.download('./Downloads/')
         
@@ -77,11 +77,14 @@ class Downloader:
         messagebox.showinfo(
         "유튜브 다운로드 프로그램", "동영상이 성공적으로 다운로드 되었습니다.")
 
+########################################################################################
 # test code
-with open('./test_url.txt', 'r') as file_data:
-    for line in file_data:
-        print(line)
-        test_url = line
+########################################################################################
+
+# with open('./src/test_url.txt', 'r') as file_data:
+#     for line in file_data:
+#         print(line)
+#         test_url = line
         
-dl = Downloader()
-dl.youtube_download(test_url)
+# dl = Downloader()
+# dl.youtube_download(test_url)
