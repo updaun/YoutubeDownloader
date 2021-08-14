@@ -40,18 +40,19 @@ class Downloader:
             messagebox.showwarning("유튜브 다운로드 프로그램", "[오류] 폴더 생성을 실패하였습니다.")
 
 
-    # def show_progress_bar(stream, _chunk, _file_handle, bytes_remaining):
-    #     current = ((stream.filesize - bytes_remaining)/stream.filesize)
-    #     percent = ('{0:.1f}').format(current*100)
-    #     progress = int(50*current)
-    #     status = '█' * progress + '-' * (50 - progress)
-    #     sys.stdout.write(' ↳ |{bar}| {percent}%\r'.format(bar=status, percent=percent))
-    #     sys.stdout.flush()
 
     # 유튜브 동영상 다운로드 함수 
     def youtube_download(self, youtube_url):
 
         global file_size
+
+        def show_progress_bar(stream, _chunk, bytes_remaining):
+            current = ((stream.filesize - bytes_remaining)/stream.filesize)
+            percent = ('{0:.1f}').format(current*100)
+            progress = int(50*current)
+            status = '█' * progress + '-' * (50 - progress)
+            sys.stdout.write(' ↳ |{bar}| {percent}%\r'.format(bar=status, percent=percent))
+            sys.stdout.flush()
 
         print('[진행] 동영상 다운로드를 시작합니다.\n')
 
@@ -59,8 +60,8 @@ class Downloader:
             # 동영상 다운로드 메서드
             video = YouTube(youtube_url)
             # video = YouTube(youtube_url, on_progress_callback=self.show_progress_bar)
-            # video.register_on_progress_callback(self.show_progress_bar)
-            video_type = video.streams.filter(progressive = True, file_extension = "mp4").first()
+            video.register_on_progress_callback(show_progress_bar)
+            video_type = video.streams.filter(progressive = True, file_extension = "mp4").get_highest_resolution()
             video_type.download('./Downloads/')
         
         except Exception as all_e:
@@ -71,7 +72,7 @@ class Downloader:
             "유튜브 다운로드 프로그램", "[오류] 링크 주소를 다시 확인해 주세요.")
 
         file_size = video_type.filesize
-        print("동영상 용량 :", round(file_size/1000000, 2),"MB\n")
+        print("\n\n동영상 용량 :", round(file_size/1000000, 2),"MB\n")
 
         print('[완료] 동영상을 성공적으로 다운로드 되었습니다.\n')
         messagebox.showinfo(
