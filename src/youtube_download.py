@@ -71,8 +71,8 @@ class Downloader:
             messagebox.showinfo(
             "유튜브 다운로드 프로그램", "[오류] 링크 주소를 다시 확인해 주세요.")
 
-        file_size = video_type.filesize
-        print("\n\n동영상 용량 :", round(file_size/1000000, 2),"MB\n")
+        # file_size = video_type.filesize
+        # print("\n\n동영상 용량 :", round(file_size/1000000, 2),"MB\n")
 
         print('[완료] 동영상을 성공적으로 다운로드 되었습니다.\n')
         messagebox.showinfo(
