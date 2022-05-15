@@ -10,7 +10,7 @@
 - you have to uninstall existing version. And install newest version. (now pytube 11.0.0)
 
 ```
-pip install -U pytube
+pip install -r requirements.txt
 ```
 
 ## You can enjoy Youtube downloader "Run youtube_downloader.bat"
