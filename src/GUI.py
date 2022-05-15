@@ -1,12 +1,14 @@
 from tkinter import *
 import tkinter.font
 from youtube_download import Downloader
+from youtube_download_mp3 import Downloader as MP3_Downloader
 from tkinter import messagebox
 import pytube
 
 dl = Downloader()
+mp3_dl = MP3_Downloader()
 
-projectTitle = 'Youtube Downloader v1.0'
+projectTitle = 'Youtube Downloader v1.1'
 
 # 사용 색상
 bgcolor = '#F2F0EB'
@@ -15,7 +17,7 @@ btncolor = '#FF0000'
 # 창 생성
 root = Tk()
 # 프로그램 크기 및 위치 지정
-root.geometry("440x400+500+150")
+root.geometry("440x450+500+150")
 #프로그램 창 크기 변경 제한
 root.resizable(False, False)
 # 프로그램 상단 타이틀 바 로고 import
@@ -46,6 +48,8 @@ imgLabel1 = Label(root, image=photoimage1, width=85,
 btn = Button(root, text="동영상 다운로드", width=24, height=1, font=font,
               foreground='white', background=btncolor, command=lambda: dl.action(inputText.get()))
 
+btn_mp3 = Button(root, text="음원 다운로드", width=24, height=1, font=font,
+              foreground='white', background=btncolor, command=lambda: mp3_dl.action(inputText.get()))
 
 # 공백 설정
 label000 = Label(root, text='', anchor="sw", width=40,
@@ -55,6 +59,8 @@ label001 = Label(root, text='', anchor="sw", width=40,
 label002 = Label(root, text='', anchor="sw", width=40,
                  height=1, font=font0, background=bgcolor)
 label003 = Label(root, text='', anchor="sw", width=40,
+                 height=1, font=font0, background=bgcolor)
+label004 = Label(root, text='', anchor="sw", width=40,
                  height=1, font=font0, background=bgcolor)
 
 # 프로그램명 설정
@@ -87,6 +93,10 @@ inputText.pack()
 label003.pack()
 # 버튼
 btn.pack()
+# 공백
+label004.pack()
+# mp3 다운로드 버튼
+btn_mp3.pack()
 
 # 'Enter' 키를 눌러 '동영상 다운로드' 버튼 클릭
 root.bind('<Return>', lambda event=None: btn.invoke())
