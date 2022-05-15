@@ -7,15 +7,10 @@
 - python3.X upper
 
 ## install pytube
-- you have to uninstall existing version.
+- you have to uninstall existing version. And install newest version. (now pytube 11.0.0)
 
 ```
-pip uninstall pytube
-```
-- And install newest version. (now pytube 11.0.0)
-
-```
-pip uninstall pytube
+pip install -U pytube
 ```
 
 ## You can enjoy Youtube downloader "Run youtube_downloader.bat"
